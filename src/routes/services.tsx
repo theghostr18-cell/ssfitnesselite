@@ -21,7 +21,7 @@ export const Route = createFileRoute("/services")({
 
 function Services() {
   const [active, setActive] = useState(0);
-  const s = SERVICES[active];
+  const s = SERVICES[active] ?? SERVICES[0]!;
   return (
     <>
       <PageHero kicker="Services" title="Train" accent="every way" text="Strength, cardio, coaching and classes — all on one air-conditioned floor." kind="dumbbell" />

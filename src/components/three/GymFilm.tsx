@@ -3,8 +3,7 @@ import { Environment, Lightformer, MeshReflectorMaterial, RoundedBox } from "@re
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 
-/** Shared scroll progress 0..1 written by GSAP ScrollTrigger, read every frame. */
-export const film = { p: 0, mx: 0, my: 0 };
+import { film } from "./film-state";
 
 const RED = "#d8262b";
 const BLACK = "#0d0d0f";

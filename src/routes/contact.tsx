@@ -17,7 +17,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "", interest: SERVICES[0].title, time: "Morning" });
+  const [form, setForm] = useState({ name: "", phone: "", interest: SERVICES[0]!.title, time: "Morning" });
   const [error, setError] = useState("");
   const submit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -58,7 +58,7 @@ function Gallery() {
         {open !== null && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[80] grid place-items-center bg-background/95 p-4" onClick={() => setOpen(null)}>
             <button aria-label="Close" className="absolute right-6 top-6 grid h-12 w-12 place-items-center rounded-full border border-border"><X /></button>
-            <motion.img initial={{ scale: 0.85, rotateY: -20 }} animate={{ scale: 1, rotateY: 0 }} src={PHOTOS[open].src} alt={PHOTOS[open].alt} className="max-h-[88vh] max-w-full object-contain" style={{ transformPerspective: 1000 }} />
+            <motion.img initial={{ scale: 0.85, rotateY: -20 }} animate={{ scale: 1, rotateY: 0 }} src={PHOTOS[open]!.src} alt={PHOTOS[open]!.alt} className="max-h-[88vh] max-w-full object-contain" style={{ transformPerspective: 1000 }} />
           </motion.div>
         )}
       </AnimatePresence>

@@ -40,7 +40,7 @@ function About() {
       <section className="px-6 pb-28 md:px-12">
         <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2">
           <Reveal className="relative">
-            <img src={PHOTOS[1].src} alt={PHOTOS[1].alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <img src={PHOTOS[1]!.src} alt={PHOTOS[1]!.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
             <div className="absolute -bottom-6 -right-6 hidden bg-primary p-6 font-display text-3xl text-primary-foreground md:block">2nd Floor<br />Ganaraya Bldg.</div>
           </Reveal>
           <Reveal delay={0.15}>

@@ -73,7 +73,7 @@ function Home() {
     <>
       <section ref={wrap} className="relative" style={{ height: "750vh" }}>
         <div className="sticky top-0 h-screen w-full overflow-hidden" data-scene-ready={ready ? "" : undefined}>
-          <Client3D fallback={<img src={PHOTOS[0].src} alt={PHOTOS[0].alt} className="h-full w-full object-cover opacity-60" />}>
+          <Client3D fallback={<img src={PHOTOS[0]!.src} alt={PHOTOS[0]!.alt} className="h-full w-full object-cover opacity-60" />}>
             <Suspense fallback={null}>
               <GymFilm onReady={() => setReady(true)} />
             </Suspense>

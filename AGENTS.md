@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Home 3D film: GSAP ScrollTrigger writes scroll progress into `src/components/three/film-state.ts`; three.js scenes read it in `useFrame` (no React state per frame) so scroll stays smooth.
+- Business facts live only in `src/lib/business.ts`; never invent details not supplied by the owner.

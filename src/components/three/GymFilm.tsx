@@ -21,8 +21,8 @@ const SHOTS: [number, [number, number, number], [number, number, number]][] = [
   [0.42, [0.6, 1.9, -20], [0, 1.2, -30]],
   [0.58, [2.6, 1.6, -27], [0, 1.6, -30.5]],
   [0.74, [-0.8, 1.5, -37], [3.6, 1.0, -41]],
-  [0.88, [0, 2.2, -45], [0, 3.6, -55]],
-  [1.0, [0, 3.0, -49.5], [0, 3.9, -55.5]],
+  [0.88, [0, 2.2, -45], [1, 3.6, -55]],
+  [1.0, [0, 3.0, -49.5], [1.8, 3.9, -55.5]],
 ];
 
 function CameraRig() {
@@ -38,9 +38,9 @@ function CameraRig() {
     const dt = Math.min(d, 0.05);
     const p = film.p;
     let i = 0;
-    while (i < SHOTS.length - 2 && p > SHOTS[i + 1][0]) i++;
-    const [p0, a0, l0] = SHOTS[i];
-    const [p1, a1, l1] = SHOTS[i + 1];
+    while (i < SHOTS.length - 2 && p > SHOTS[i + 1]![0]) i++;
+    const [p0, a0, l0] = SHOTS[i]!;
+    const [p1, a1, l1] = SHOTS[i + 1]!;
     const t = smooth(p0, p1, p);
     pos.copy(tmpA.fromArray(a0)).lerp(tmpB.fromArray(a1), t);
     look.copy(tmpA.fromArray(l0)).lerp(tmpB.fromArray(l1), t);
@@ -167,7 +167,7 @@ function Hall() {
           {[-4.6, 4.6].map((x, j) => (
             <mesh key={x} position={[x, 2.5, z]} castShadow>
               <boxGeometry args={[0.8, 5, 0.8]} />
-              <meshStandardMaterial color={BLACK} roughness={0.4} map={(i + j) % 3 === 0 ? posters[(i + j) % 3] : undefined} />
+              <meshStandardMaterial color={BLACK} roughness={0.4} {...((i + j) % 3 === 0 ? { map: posters[i % 3]! } : {})} />
             </mesh>
           ))}
           <LedFrame z={z - 2.8} />
@@ -261,7 +261,7 @@ function Barbell() {
       const slot = Math.floor(i / 2);
       const t = smooth(0.34 + slot * 0.04, 0.48 + slot * 0.04, p);
       const end = new THREE.Vector3(side * (0.9 + slot * 0.09), 0, 0);
-      const startLocal = starts[i].clone().sub(new THREE.Vector3(0, 0.9, -30.5));
+      const startLocal = starts[i]!.clone().sub(new THREE.Vector3(0, 0.9, -30.5));
       g.position.lerpVectors(startLocal, end, t);
       g.rotation.x = (1 - t) * (clock.elapsedTime * 2 + i);
       g.rotation.y = (1 - t) * 2;
@@ -366,7 +366,7 @@ function Chandelier() {
         {rings.map(([x, y, r], i) => (
           <mesh key={i} position={[x, y, 0]}>
             <torusGeometry args={[r, 0.06, 16, 48]} />
-            <meshStandardMaterial ref={i === 0 ? mat : undefined} color="#e7c27a" emissive="#ffb84a" emissiveIntensity={1} metalness={1} roughness={0.25} />
+            <meshStandardMaterial {...(i === 0 ? { ref: mat } : {})} color="#e7c27a" emissive="#ffb84a" emissiveIntensity={1} metalness={1} roughness={0.25} />
           </mesh>
         ))}
       </group>

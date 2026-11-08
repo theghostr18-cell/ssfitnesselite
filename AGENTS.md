@@ -32,3 +32,6 @@ use the editor.
 ## Project rules
 - Home 3D film: GSAP ScrollTrigger writes scroll progress into `src/components/three/film-state.ts`; three.js scenes read it in `useFrame` (no React state per frame) so scroll stays smooth.
 - Business facts live only in `src/lib/business.ts`; never invent details not supplied by the owner.
+
+- Uploaded gym films use the reusable ScrollVideo component; ScrollTrigger writes desired timestamps and a seek-completion queue updates paused video elements to avoid per-frame React renders.
+- Career presents fitness transformations, with a coming-soon state until the owner supplies authentic member stories and consented images.

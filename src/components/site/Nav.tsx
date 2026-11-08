@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { BIZ, waLink } from "@/lib/business";
 
 const LINKS = [
@@ -9,6 +10,7 @@ const LINKS = [
   { to: "/about", label: "About" },
   { to: "/services", label: "Services" },
   { to: "/gallery", label: "Gallery" },
+  { to: "/career", label: "Career" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -25,12 +27,12 @@ export function Nav() {
             <span className="grid h-8 w-8 place-items-center rounded-full bg-primary font-display text-sm text-primary-foreground">SS</span>
             <span className="font-display text-lg tracking-wide">Fitness Elite</span>
           </Link>
-          <ul className="hidden items-center gap-1 md:flex">
+          <ul className="hidden items-center gap-1 lg:flex">
             {LINKS.map((l) => {
               const active = l.to === "/" ? path === "/" : path.startsWith(l.to);
               return (
                 <li key={l.to} className="relative">
-                  <Link to={l.to} className={`relative z-10 block px-4 py-2 text-sm font-semibold uppercase tracking-widest transition-colors ${active ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
+                  <Link to={l.to} className={`relative z-10 block px-3 py-2 text-sm font-semibold uppercase tracking-widest transition-colors ${active ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}>
                     {l.label}
                   </Link>
                   {active && <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 380, damping: 30 }} />}
@@ -42,18 +44,18 @@ export function Nav() {
             <a href={waLink("Hi SS Fitness Elite! I'd like to enquire about membership.")} target="_blank" rel="noreferrer" className="hidden rounded-full bg-foreground px-5 py-2 text-sm font-bold uppercase tracking-widest text-background transition hover:bg-primary hover:text-primary-foreground sm:block">
               Join Now
             </a>
-            <button aria-label="Open menu" onClick={() => setOpen(true)} className="grid h-10 w-10 place-items-center rounded-full border border-border md:hidden">
+            <Button variant="ghost" size="icon" aria-label="Open menu" onClick={() => setOpen(true)} className="grid h-10 w-10 place-items-center rounded-full border border-border lg:hidden">
               <Menu className="h-5 w-5" />
-            </button>
+            </Button>
           </div>
         </nav>
       </header>
       <AnimatePresence>
         {open && (
           <motion.div initial={{ clipPath: "circle(0% at 90% 5%)" }} animate={{ clipPath: "circle(150% at 90% 5%)" }} exit={{ clipPath: "circle(0% at 90% 5%)" }} transition={{ duration: 0.6, ease: [0.7, 0, 0.2, 1] }} className="fixed inset-0 z-[60] flex flex-col bg-primary p-6 text-primary-foreground">
-            <button aria-label="Close menu" onClick={() => setOpen(false)} className="ml-auto grid h-12 w-12 place-items-center rounded-full border border-primary-foreground/40">
+            <Button variant="ghost" size="icon" aria-label="Close menu" onClick={() => setOpen(false)} className="ml-auto grid h-12 w-12 place-items-center rounded-full border border-primary-foreground/40">
               <X className="h-6 w-6" />
-            </button>
+            </Button>
             <ul className="mt-10 space-y-2">
               {LINKS.map((l, i) => (
                 <motion.li key={l.to} initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 + i * 0.07 }}>

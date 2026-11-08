@@ -7,6 +7,8 @@ import { PHOTOS } from "@/lib/business";
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Gallery — Inside SS Fitness Elite, Badlapur" },
       { name: "description", content: "Real photos of the SS Fitness Elite floor: LED ceilings, red lanes, cardio row and strength machines." },
       { property: "og:title", content: "Inside SS Fitness Elite" },

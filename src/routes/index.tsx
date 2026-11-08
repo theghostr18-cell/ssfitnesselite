@@ -1,105 +1,46 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Star } from "lucide-react";
-import { Client3D } from "@/components/site/ClientOnly";
+import { Star, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/site/PageHero";
-import { film } from "@/components/three/film-state";
-import { BIZ, PHOTOS, waLink } from "@/lib/business";
-
-const GymFilm = lazy(() => import("@/components/three/GymFilm"));
+import { ScrollVideo } from "@/components/site/ScrollVideo";
+import { Button } from "@/components/ui/button";
+import { GYM_VIDEOS } from "@/lib/gym-videos";
+import { BIZ, SERVICES, waLink } from "@/lib/business";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "SS Fitness Elite — Walk Into Badlapur's Elite Gym" },
-      { name: "description", content: "Scroll through SS Fitness Elite in 3D: cardio, strength and dumbbell zones in Badlapur East. Rated 5.0 from 79 Google reviews." },
-      { property: "og:title", content: "SS Fitness Elite — Walk Into Badlapur's Elite Gym" },
-      { property: "og:description", content: "A cinematic 3D walk through Badlapur East's 5.0-rated gym." },
-    ],
-  }),
+  head: () => ({ meta: [
+    { title: "SS Fitness Elite — A Cinematic Gym Tour in Badlapur" },
+    { name: "description", content: "Explore SS Fitness Elite through three scroll-controlled gym films. CrossFit, Zumba, Yoga, Gym and Cardio in Badlapur East." },
+    { property: "og:title", content: "SS Fitness Elite — Step Inside" },
+    { property: "og:description", content: "A cinematic tour of SS Fitness Elite in Badlapur East." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ] }),
   component: Home,
 });
 
-// Chapter captions: [start, end] progress windows
-const CHAPTERS = [
-  { a: -0.1, b: 0.1, k: "Badlapur East · 2nd Floor", t: ["SS Fitness", "Elite"], d: "Scroll to step inside." },
-  { a: 0.18, b: 0.34, k: "Zone 01 — Cardio", t: ["Burn", "the line"], d: "Treadmills, ellipticals and spin bikes along the mirrored wall." },
-  { a: 0.38, b: 0.66, k: "Zone 02 — Strength", t: ["Load", "the bar"], d: "Every plate earns its place. Then you lift." },
-  { a: 0.68, b: 0.84, k: "Zone 03 — Dumbbell wall", t: ["Pick", "your weight"], d: "Hover a dumbbell. It's ready when you are." },
-  { a: 0.88, b: 1.2, k: "5.0 ★ · 79 Google reviews", t: ["No excuses.", "Just results."], d: "Your first session starts with one call." },
-];
-
 function Home() {
-  const wrap = useRef<HTMLDivElement>(null);
-  const caps = useRef<(HTMLDivElement | null)[]>([]);
-  const bar = useRef<HTMLDivElement>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const paint = (p: number) => {
-      CHAPTERS.forEach((c, i) => {
-        const el = caps.current[i];
-        if (!el) return;
-        const fadeIn = Math.min(1, Math.max(0, (p - c.a) / 0.04));
-        const fadeOut = Math.min(1, Math.max(0, (c.b - p) / 0.04));
-        const o = Math.min(fadeIn, fadeOut);
-        el.style.opacity = String(o);
-        el.style.transform = `translate3d(0, ${(1 - o) * (p < c.a + 0.04 ? 40 : -40)}px, 0)`;
-        el.style.pointerEvents = o > 0.5 ? "auto" : "none";
-      });
-      if (bar.current) bar.current.style.transform = `scaleX(${p})`;
-    };
-    paint(0);
-    const st = ScrollTrigger.create({
-      trigger: wrap.current,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: 1,
-      onUpdate: (s) => {
-        film.p = s.progress;
-        paint(s.progress);
-      },
-    });
-    return () => {
-      st.kill();
-      film.p = 0;
-    };
-  }, []);
-
   return (
     <>
-      <section ref={wrap} className="relative" style={{ height: "750vh" }}>
-        <div className="sticky top-0 h-screen w-full overflow-hidden" data-scene-ready={ready ? "" : undefined}>
-          <Client3D fallback={<img src={PHOTOS[0]!.src} alt={PHOTOS[0]!.alt} className="h-full w-full object-cover opacity-60" />}>
-            <Suspense fallback={null}>
-              <GymFilm onReady={() => setReady(true)} />
-            </Suspense>
-          </Client3D>
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,var(--background)_100%)]" />
-          {CHAPTERS.map((c, i) => (
-            <div key={i} ref={(el) => { caps.current[i] = el; }} className={`absolute inset-x-0 px-6 md:px-12 ${i === 0 ? "bottom-24 md:bottom-16" : i % 2 ? "bottom-16 md:top-1/3 md:bottom-auto" : "bottom-16 md:top-1/3 md:bottom-auto md:text-right"}`} style={{ opacity: 0 }}>
-              <div className={`mx-auto max-w-7xl ${i % 2 === 0 && i !== 0 ? "md:ml-auto" : ""}`}>
-                <p className="mb-3 text-xs font-bold uppercase tracking-[0.4em] text-primary">{c.k}</p>
-                <h2 className={`font-display led-glow ${i === 0 ? "text-[19vw] md:text-[13vw]" : "text-6xl md:text-8xl"}`}>
-                  {c.t[0]}<br /><span className="text-primary">{c.t[1]}</span>
-                </h2>
-                <p className="mt-4 text-base text-muted-foreground md:text-lg">{c.d}</p>
-                {i === CHAPTERS.length - 1 && (
-                  <div className={`mt-6 flex flex-wrap gap-3 ${i % 2 === 0 ? "md:justify-end" : ""}`}>
-                    <a href={`tel:${BIZ.phoneTel}`} className="red-glow rounded-full bg-primary px-7 py-3 font-bold uppercase tracking-widest text-primary-foreground">Call {BIZ.phoneDisplay}</a>
-                    <Link to="/contact" className="rounded-full border border-foreground/40 px-7 py-3 font-bold uppercase tracking-widest">Visit us</Link>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-          <div className="absolute inset-x-0 bottom-0 h-1 bg-border"><div ref={bar} className="h-full origin-left bg-primary" style={{ transform: "scaleX(0)" }} /></div>
+      <ScrollVideo {...GYM_VIDEOS[0]} number="01" title="SS Fitness" accent="Elite" text={BIZ.addressShort} first />
+      <section className="px-6 py-20 md:px-12">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 md:grid-cols-2">
+          <Reveal><p className="text-sm font-bold uppercase text-primary">The gym</p><h2 className="mt-4 font-display text-5xl md:text-7xl">A place to<br />push further.</h2></Reveal>
+          <Reveal><p className="text-lg text-muted-foreground">{BIZ.about}</p><Button asChild variant="outline" className="mt-6"><Link to="/about">Inside SS Fitness Elite <ArrowUpRight /></Link></Button></Reveal>
         </div>
       </section>
-
+      <ScrollVideo {...GYM_VIDEOS[1]} number="02" title="Find your" accent="movement." text="CrossFit. Zumba. Yoga. Gym. Cardio." />
+      <section className="px-6 py-20 md:px-12">
+        <div className="mx-auto max-w-7xl">
+          <Reveal><p className="text-sm font-bold uppercase text-primary">Five ways to train</p><h2 className="mt-4 font-display text-5xl md:text-7xl">Make it your own.</h2></Reveal>
+          <div className="mt-10 grid border-t border-border sm:grid-cols-2 lg:grid-cols-5">
+            {SERVICES.map(s => <Link key={s.id} to="/services" className="group border-b border-border py-7 pr-4"><span className="text-sm text-primary">{s.n}</span><h3 className="mt-4 flex items-center gap-3 font-display text-3xl">{s.title}<ArrowUpRight className="h-5 w-5 text-primary transition-transform group-hover:-translate-y-1" /></h3></Link>)}
+          </div>
+        </div>
+      </section>
+      <ScrollVideo {...GYM_VIDEOS[2]} number="03" title="Show up." accent="Build yourself." text="Your next chapter starts here." />
+      <section className="px-6 py-16 md:px-12">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 md:flex-row md:items-center"><h2 className="font-display text-4xl md:text-6xl">Every journey starts somewhere.</h2><Button asChild size="lg"><Link to="/career">Transformations <ArrowUpRight /></Link></Button></div>
+      </section>
       <section className="relative px-6 py-28 md:px-12">
         <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.2fr_1fr]">
           <Reveal>

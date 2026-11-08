@@ -84,3 +84,14 @@
 @utility red-glow {
   box-shadow: 0 0 40px -6px color-mix(in oklab, var(--primary) 70%, transparent);
 }
+
+
+.scroll-film { height: 320svh; }
+.film-shade { background: linear-gradient(to top, var(--background) 0%, color-mix(in oklab, var(--background) 72%, transparent) 18%, transparent 65%, color-mix(in oklab, var(--background) 40%, transparent) 100%); }
+.film-title { font-size: 7rem; overflow-wrap: anywhere; letter-spacing: 0; }
+@media (max-width: 767px) {
+  .film-title { font-size: 4rem; }
+  .scroll-film { height: 250svh; }
+}
+@media (max-width: 380px) { .film-title { font-size: 3.25rem; } }
+@media (prefers-reduced-motion: reduce) { .scroll-film { height: 100svh; } }

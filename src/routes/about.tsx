@@ -5,6 +5,8 @@ import { BIZ, PHOTOS } from "@/lib/business";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About SS Fitness Elite — Premium Gym, Badlapur East" },
       { name: "description", content: "Modern equipment, expert trainers and a motivating environment near Ghorpade Chowk, Badlapur East." },
       { property: "og:title", content: "About SS Fitness Elite" },

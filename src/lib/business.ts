@@ -37,11 +37,11 @@ export const BIZ = {
 };
 
 export const SERVICES = [
-  { id: "strength", n: "01", title: "Weight Training", text: "Plate-loaded and selectorised machines, cable stations, benches and a full dumbbell wall for building raw strength.", obj: "plate" as const },
-  { id: "cardio", n: "02", title: "Cardio Zone", text: "A row of treadmills, ellipticals and spin bikes along the mirrored wall — burn, sweat, repeat.", obj: "dumbbell" as const },
-  { id: "pt", n: "03", title: "Personal Training", text: "Professional, supportive trainers who guide your form, plan and progress toward your goal.", obj: "kettlebell" as const },
-  { id: "classes", n: "04", title: "Fitness Classes", text: "Group sessions that keep the energy high and the motivation higher.", obj: "plate" as const },
-  { id: "ac", n: "05", title: "Air-Conditioned Floor", text: "A clean, well-maintained AC gym floor so you can train hard in comfort, all year round.", obj: "dumbbell" as const },
+  { id: "crossfit", n: "01", title: "CrossFit", text: "Challenge yourself with CrossFit. Contact the gym for session details.", obj: "plate" as const },
+  { id: "zumba", n: "02", title: "Zumba", text: "Bring your energy to Zumba. Contact the gym for session details.", obj: "dumbbell" as const },
+  { id: "yoga", n: "03", title: "Yoga", text: "Make space for Yoga in your routine. Contact the gym for session details.", obj: "kettlebell" as const },
+  { id: "gym", n: "04", title: "Gym", text: "Train on the gym floor with modern equipment and a motivating environment.", obj: "plate" as const },
+  { id: "cardio", n: "05", title: "Cardio", text: "Keep moving in the cardio zone with treadmills, ellipticals and spin bikes.", obj: "dumbbell" as const },
 ];
 
 export const PHOTOS = [g5, g1, g2, g3, g4, g6, g7, g8, g9].map((a, i) => ({ src: a.url, alt: `Inside SS Fitness Elite — photo ${i + 1}` }));

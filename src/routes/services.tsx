@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { lazy, Suspense, useState } from "react";
 import { Client3D } from "@/components/site/ClientOnly";
 import { PageHero } from "@/components/site/PageHero";
+import { Button } from "@/components/ui/button";
 import { SERVICES, waLink } from "@/lib/business";
 
 const HeroObject = lazy(() => import("@/components/three/HeroObject"));
@@ -10,10 +11,12 @@ const HeroObject = lazy(() => import("@/components/three/HeroObject"));
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Weight Training, Cardio & PT | SS Fitness Elite" },
-      { name: "description", content: "Weight training, cardio zone, personal training and fitness classes at SS Fitness Elite, Badlapur." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { title: "CrossFit, Zumba, Yoga, Gym & Cardio | SS Fitness Elite" },
+      { name: "description", content: "CrossFit, Zumba, Yoga, Gym and Cardio at SS Fitness Elite, Badlapur." },
       { property: "og:title", content: "Services at SS Fitness Elite" },
-      { property: "og:description", content: "Strength, cardio, personal training and classes in Badlapur East." },
+      { property: "og:description", content: "Five ways to train in Badlapur East: CrossFit, Zumba, Yoga, Gym and Cardio." },
     ],
   }),
   component: Services,
@@ -21,19 +24,20 @@ export const Route = createFileRoute("/services")({
 
 function Services() {
   const [active, setActive] = useState(0);
-  const s = SERVICES[active] ?? SERVICES[0]!;
+  const s = SERVICES[active] ?? SERVICES[0];
+  if (!s) return null;
   return (
     <>
-      <PageHero kicker="Services" title="Train" accent="every way" text="Strength, cardio, coaching and classes — all on one air-conditioned floor." kind="dumbbell" />
+      <PageHero kicker="Services" title="Train" accent="every way" text="CrossFit, Zumba, Yoga, Gym and Cardio. Find your way to move." kind="dumbbell" />
       <section className="px-6 pb-28 md:px-12">
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2">
           <ul className="divide-y divide-border border-y border-border">
             {SERVICES.map((sv, i) => (
               <li key={sv.id}>
-                <button onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)} className="group flex w-full items-baseline gap-6 py-6 text-left">
+                <Button variant="ghost" onMouseEnter={() => setActive(i)} onFocus={() => setActive(i)} onClick={() => setActive(i)} className="group flex h-auto w-full justify-start items-baseline gap-6 rounded-none px-0 py-6 text-left">
                   <span className={`font-display text-xl transition ${active === i ? "text-primary" : "text-muted-foreground"}`}>{sv.n}</span>
                   <span className={`font-display text-4xl transition-all md:text-6xl ${active === i ? "translate-x-3 text-foreground" : "text-muted-foreground group-hover:text-foreground"}`}>{sv.title}</span>
-                </button>
+                </Button>
               </li>
             ))}
           </ul>

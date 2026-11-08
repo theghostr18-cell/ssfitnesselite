@@ -7,6 +7,8 @@ import { BIZ, SERVICES, waLink } from "@/lib/business";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Contact & Join — SS Fitness Elite, Badlapur East" },
       { name: "description", content: "Call +91 83081 41817 or visit 2nd floor, Ganaraya building, New DP Rd, Katrap, Badlapur East." },
       { property: "og:title", content: "Contact SS Fitness Elite" },
@@ -17,7 +19,7 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [form, setForm] = useState({ name: "", phone: "", interest: SERVICES[0]!.title, time: "Morning" });
+  const [form, setForm] = useState({ name: "", phone: "", interest: SERVICES[0]?.title ?? "Gym", time: "Morning" });
   const [error, setError] = useState("");
   const submit = (e: React.FormEvent) => {
     e.preventDefault();

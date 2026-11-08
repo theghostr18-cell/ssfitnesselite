@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/PageHero";
 import { ScrollVideo } from "@/components/site/ScrollVideo";
 import { Button } from "@/components/ui/button";
 import { GYM_VIDEOS } from "@/lib/gym-videos";
-import { BIZ, SERVICES, waLink } from "@/lib/business";
+import { BIZ, SERVICES } from "@/lib/business";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [

@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "asset_id": "32cfc145-8b1f-4f0f-8a0a-c04d85ac6175",
+  "asset_id": "b04367f5-d65b-4bbd-8689-12e23375d893",
   "project_id": "8538aebf-2326-4339-8b6c-ee4dc10e8431",
-  "url": "/__l5e/assets-v1/32cfc145-8b1f-4f0f-8a0a-c04d85ac6175/gym-film-3.mp4",
-  "r2_key": "a/v1/8538aebf-2326-4339-8b6c-ee4dc10e8431/32cfc145-8b1f-4f0f-8a0a-c04d85ac6175/gym-film-3.mp4",
-  "original_filename": "gym-film-3.mp4",
-  "size": 7714667,
+  "url": "/__l5e/assets-v1/b04367f5-d65b-4bbd-8689-12e23375d893/gym-film-3-smooth.mp4",
+  "r2_key": "a/v1/8538aebf-2326-4339-8b6c-ee4dc10e8431/b04367f5-d65b-4bbd-8689-12e23375d893/gym-film-3-smooth.mp4",
+  "original_filename": "gym-film-3-smooth.mp4",
+  "size": 5008779,
   "content_type": "video/mp4",
-  "created_at": "2026-11-08T07:27:06Z"
+  "created_at": "2026-11-08T07:35:37Z"
 }

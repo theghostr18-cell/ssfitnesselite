@@ -58,7 +58,7 @@ export function ScrollVideo({ src, poster, number, title, accent, text, first = 
     <section ref={section} className="scroll-film relative" aria-label={`Gym film ${number}`}>
       <div className="sticky top-0 h-svh overflow-hidden bg-background">
         {failed ? <img src={poster} alt="Inside SS Fitness Elite" className="h-full w-full object-contain md:object-cover" /> : (
-          <video ref={video} src={src} poster={poster} muted playsInline preload={first ? "auto" : "metadata"} onError={() => setFailed(true)} className="h-full w-full object-contain md:object-cover" aria-label={`SS Fitness Elite — film ${number}`} />
+          <video ref={video} src={src} poster={poster} muted playsInline preload="auto" onError={() => setFailed(true)} className="h-full w-full object-contain md:object-cover" aria-label={`SS Fitness Elite — film ${number}`} />
         )}
         <div className="film-shade pointer-events-none absolute inset-0" />
         <div ref={caption} className="absolute inset-x-0 bottom-14 px-6 md:bottom-20 md:px-12">

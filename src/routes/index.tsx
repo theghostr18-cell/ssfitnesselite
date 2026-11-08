@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/PageHero";
 import { ScrollVideo } from "@/components/site/ScrollVideo";
 import { Button } from "@/components/ui/button";
 import { GYM_VIDEOS } from "@/lib/gym-videos";
-import { BIZ, SERVICES, waLink } from "@/lib/business";
+import { BIZ, SERVICES } from "@/lib/business";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -67,16 +67,6 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-primary px-6 py-24 text-primary-foreground md:px-12">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-          <Reveal>
-            <p className="text-xs font-bold uppercase tracking-[0.4em]">{BIZ.offer.title}</p>
-            <p className="font-display text-[22vw] md:text-[12rem]">{BIZ.offer.price}</p>
-            <p className="max-w-md opacity-80">{BIZ.offer.note}</p>
-          </Reveal>
-          <a href={waLink("Hi! I'd like to know about the 1 year membership offer.")} target="_blank" rel="noreferrer" className="rounded-full bg-background px-8 py-4 font-bold uppercase tracking-widest text-foreground transition hover:scale-105">Claim on WhatsApp</a>
-        </div>
-      </section>
     </>
   );
 }
